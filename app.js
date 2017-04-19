@@ -7,7 +7,8 @@ const sight = require('./serviceLogic/G2C/sight');
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-
+var promise = require('promise');
+var asy = require('async');
 
 
 app.use(bodyParser.json()); // for parsing application/json
@@ -19,7 +20,6 @@ app.get('/22', function (req, res) {
 });
 
 app.get('/keyboard', function (req, res) {
-  
        console.log( "키보드불림" );
         //  res.json( { "type" : "buttons", "buttons" : ["선택 1ㅋ", "선택 2ㅋ", "선택 3ㅋ"] } ); //버튼타입
         res.json( { "type" : "text" } );
@@ -34,10 +34,14 @@ app.post('/message', function (req, res, next) {
     var msg = "";
     if(req.body.user_key === "P4KzD3k0nKUF"){msg = "우리망고 헬로우~!"}
     if(req.body.user_key === "f3ro6uOU5lfK"){msg = "제작자님 헬로우~!"}
-    
-   console.log(req.body);
-   res.json({ "message":{ "text" : msg + "어서오세요!ㅎㅎ" }});
-})
+  // console.log(req.body);
+  // res.json({ "message":{"text" : msg + test}});
+  sight.run("keyword",req.body.content,res);
+
+  //res.json(returnInfo);
+  
+});
+
 
 app.post('/friend', function (req, res, next) {
   console.log( "친구추가" );
