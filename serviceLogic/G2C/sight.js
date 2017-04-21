@@ -2,7 +2,6 @@
 // And this module's is only for delivering Data bettwen DoubleM platform and data.go.kr. like a data transfer module.
 //이 모듈은 대한민국 OpenData 플랫폼을 활용하여 제작되었습니다.
 //이 모듈은 국가 관광지 데이터를 가져오는 모듈 역활을 할 예정입니다. DTM data transfer module
-//todo 170419 : 경복궁치면 에러 나는 문제 해결
 // ajax 설치 필요. https://www.npmjs.com/package/ajax-request
 var request = require('ajax-request');
 var express = require('express');
@@ -39,7 +38,7 @@ function runByKeyword(keyword,res){
        //return returnInfo;
        })
 };
-   
+ 
 
  //  { "message": { "text":sightInformation, "photo": { "url": "https://photo.src", "width": 640, "height": 480 }, "message_button": { "label": "구글검색으로 더보기", "url": "https://coupon/url" } }, "keyboard": { "type": "buttons", "buttons": [ "리스트보기", "다른지역보기", "취소하기" ] } }
 
@@ -59,6 +58,11 @@ function TextMaker(keyword, count, list) {
     count+"개의 볼거리가 있습니다. 관광지 목록은 다음과 같습니다. "+list;
     
     return sightInformation;
+}
+
+//네이버로부터 이미지 검색 기능, 추후 별도 모듈로 분리 :17.04.21
+function IMGfromNaver(argument) {
+    // body...
 }
 
 module.exports.run = run;
