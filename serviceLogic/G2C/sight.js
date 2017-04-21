@@ -20,12 +20,17 @@ function runByKeyword(keyword,res){
    var returnInfo = "";
     request(URIMaker(keyword), function(err, res, body) {
             var sightName = JSON.parse(body); //String to JSON Object
+            console.log(sightName.response);
             totalCountOfSightsinKeyword = sightName.response.body.totalCount; //키워드 지역의 총 관광지 개수 
-            
-            for(i=0;i<totalCountOfSightsinKeyword&&i<10;i++){NameList = NameList +sightName.response.body.items.item[i].title+' / '};
+            //키워드 결과 값이 한가지 일 경우 
+            if(totalCountOfSightsinKeyword==1){
+            NameList = sightName.response.body.items.item.title}
+            //키워드 결과 값이 한개 이상일 경우 
+            else{for(i=0;(i<totalCountOfSightsinKeyword)&&(i<10);i++){NameList = NameList +sightName.response.body.items.item[i].title+' / '}};
             console.log(totalCountOfSightsinKeyword);
             var message = TextMaker(keyword,totalCountOfSightsinKeyword,NameList);
-            returnInfo = { "message": { "text":message, "photo": { "url": "https://photo.src", "width": 640, "height": 480 }, "message_button": { "label": "구글검색으로 더보기", "url": "https://coupon/url" } }};//, "keyboard": { "type": "buttons", "buttons": [ "리스트보기", "다른지역보기", "취소하기" ] } };
+            if(totalCountOfSightsinKeyword>1){keyword+=" 관광지";}
+            returnInfo = { "message": { "text":message, "photo": { "url": "https://www.google.co.kr/search?hl=ko&site=imghp&tbm=isch&source=hp&biw=640&bih=480&q"+keyword, "width": 640, "height": 480 }, "message_button": { "label": "구글검색으로 더보기", "url": "https://www.google.co.kr/search?q="+keyword } }};//, "keyboard": { "type": "buttons", "buttons": [ "리스트보기", "다른지역보기", "취소하기" ] } };
        console.log("111");
        console.log(totalCountOfSightsinKeyword);   
        console.log("222");
