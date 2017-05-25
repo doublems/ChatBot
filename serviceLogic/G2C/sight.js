@@ -5,7 +5,7 @@
 // ajax 설치 필요. https://www.npmjs.com/package/ajax-request
 var request = require('ajax-request');
 var express = require('express');
-
+var request = require('request');
 
 function run(ParameterName, ArgumentValue, res){
 if(ParameterName === "keyword"){
@@ -17,26 +17,25 @@ function runByKeyword(keyword,res){
    var totalCountOfSightsinKeyword = 0;
    var NameList="";
    var returnInfo = "";
-    request(URIMaker(keyword), function(err, res, body) {
+   request(URIMaker(keyword), function(err, res, body) {
             var sightName = JSON.parse(body); //String to JSON Object
-            console.log(sightName.response);
             totalCountOfSightsinKeyword = sightName.response.body.totalCount; //키워드 지역의 총 관광지 개수 
             //키워드 결과 값이 한가지 일 경우 
             if(totalCountOfSightsinKeyword==1){
             NameList = sightName.response.body.items.item.title}
             //키워드 결과 값이 한개 이상일 경우 
-            else{for(i=0;(i<totalCountOfSightsinKeyword)&&(i<10);i++){NameList = NameList +sightName.response.body.items.item[i].title+' / '}};
+            else{for(i=0;i<totalCountOfSightsinKeyword;i++){NameList = NameList +sightName.response.body.items.item[i].title+' / '}};
             console.log(totalCountOfSightsinKeyword);
             var message = TextMaker(keyword,totalCountOfSightsinKeyword,NameList);
             if(totalCountOfSightsinKeyword>1){keyword+=" 관광지";}
-            returnInfo = { "message": { "text":message, "photo": { "url": "https://www.google.co.kr/search?hl=ko&site=imghp&tbm=isch&source=hp&biw=640&bih=480&q"+keyword, "width": 640, "height": 480 }, "message_button": { "label": "구글검색으로 더보기", "url": "https://www.google.co.kr/search?q="+keyword } }};//, "keyboard": { "type": "buttons", "buttons": [ "리스트보기", "다른지역보기", "취소하기" ] } };
+            //returnInfo = { "message": { "text":message, "photo": { "url": "https://www.google.co.kr/search?hl=ko&site=imghp&tbm=isch&source=hp&biw=640&bih=480&q"+keyword, "width": 640, "height": 480 }, "message_button": { "label": "구글검색으로 더보기", "url": "https://www.google.co.kr/search?q="+keyword } }};//, "keyboard": { "type": "buttons", "buttons": [ "리스트보기", "다른지역보기", "취소하기" ] } };
+       returnInfo = { "message": { "text":message, "message_button": { "label": "구글검색으로 더보기", "url": "https://www.google.co.kr/search?q="+keyword } }};
        console.log("111");
        console.log(totalCountOfSightsinKeyword);   
        console.log("222");
        console.log(returnInfo);
        return ress.json(returnInfo);
-       //return returnInfo;
-       })
+   })
 };
  
 
@@ -61,8 +60,42 @@ function TextMaker(keyword, count, list) {
 }
 
 //네이버로부터 이미지 검색 기능, 추후 별도 모듈로 분리 :17.04.21
-function IMGfromNaver(argument) {
-    // body...
+
+/*function IMGfromNaver(keyword) {
+    eKeyword = encodeURIComponent(keyword); //!!!!!!encodeURIComponent(String val) UTF8형식으로 강릉 -> %EA%B0%95%EB%A6%89 바꿔줌 기본내장함수
+    request({ url: 'https://openapi.naver.com/v1/search/image.json?query=%EC%A3%BC%EC%8B%9D&display=10&start=1&sort=sim',
+                  headers: {
+                    'X-Naver-Client-Id' :'Z7apZSv5fv6RZduPJ5OU',
+                    'X-Naver-Client-Secret' : 'M9DdNh5gjY'
+                  }
+}, function(err, res, body) {
+            var test = JSON.parse(body); //String to JSON Object
+            console.log(test);
+});
+}*/
+
+
+function IMGfromNaver(keyword) {
+var img;
+console.log("###Do###");
+var options = {
+  url: 'https://openapi.naver.com/v1/search/image.json?query=%EC%A3%BC%EC%8B%9D&display=1&start=1&sort=sim',
+  method: 'POST',
+  headers: {
+                    'X-Naver-Client-Id' :'Z7apZSv5fv6RZduPJ5OU',
+                    'X-Naver-Client-Secret' : 'M9DdNh5gjY'
+                  }
+  
+};
+
+function callback(error, response, body) {
+  if (!error && response.statusCode == 200) {
+    var info = JSON.parse(body);
+    console.log("###Done##");
+    console.log(info);
+  }else{console.log("###Sorry##");}
+}
+request(options, callback);    
 }
 
 module.exports.run = run;
