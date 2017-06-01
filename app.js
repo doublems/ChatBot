@@ -34,12 +34,10 @@ app.post('/message', function (req, res, next) {
     var msg = "";
     if(req.body.user_key === "P4KzD3k0nKUF"){msg = "우리망고 헬로우~!"}
     if(req.body.user_key === "f3ro6uOU5lfK"){msg = "제작자님 헬로우~!"}
-  // console.log(req.body);
-  // res.json({ "message":{"text" : msg + test}});
+
   sight.run("keyword",req.body.content,res);
 
-  //res.json(returnInfo);
-  
+
 });
 
 

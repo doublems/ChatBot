@@ -19,21 +19,19 @@ function runByKeyword(keyword,res){
    var returnInfo = "";
    request(URIMaker(keyword), function(err, res, body) {
             var sightName = JSON.parse(body); //String to JSON Object
-            totalCountOfSightsinKeyword = sightName.response.body.totalCount; //키워드 지역의 총 관광지 개수 
+            totalCountOfSightsinKeyword = sightName.response.body.totalCount; //키워드 지역의 총 관광지 개수
             //키워드 결과 값이 한가지 일 경우 
             if(totalCountOfSightsinKeyword==1){
             NameList = sightName.response.body.items.item.title}
             //키워드 결과 값이 한개 이상일 경우 
-            else{for(i=0;i<totalCountOfSightsinKeyword;i++){NameList = NameList +sightName.response.body.items.item[i].title+' / '}};
-            console.log(totalCountOfSightsinKeyword);
+            else{for(i=0;i<totalCountOfSightsinKeyword;i++){
+                NameList = NameList + sightName.response.body.items.item[i].title+'\n '; //각 검색 결과마다 표기 문자
+                //if(i%2==0){NameList+="\n"} //각 검색문자 n개 마다 띄어쓰기 추가
+               }};
             var message = TextMaker(keyword,totalCountOfSightsinKeyword,NameList);
             if(totalCountOfSightsinKeyword>1){keyword+=" 관광지";}
             //returnInfo = { "message": { "text":message, "photo": { "url": "https://www.google.co.kr/search?hl=ko&site=imghp&tbm=isch&source=hp&biw=640&bih=480&q"+keyword, "width": 640, "height": 480 }, "message_button": { "label": "구글검색으로 더보기", "url": "https://www.google.co.kr/search?q="+keyword } }};//, "keyboard": { "type": "buttons", "buttons": [ "리스트보기", "다른지역보기", "취소하기" ] } };
        returnInfo = { "message": { "text":message, "message_button": { "label": "구글검색으로 더보기", "url": "https://www.google.co.kr/search?q="+keyword } }};
-       console.log("111");
-       console.log(totalCountOfSightsinKeyword);   
-       console.log("222");
-       console.log(returnInfo);
        return ress.json(returnInfo);
    })
 };
@@ -47,14 +45,14 @@ function URIMaker(keyword){
    console.log(eKeyword);
    var url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword?"
    +"ServiceKey=%2FFgkF%2F%2Fs7zMzruTxgUD41SEGDXlUg3%2FNmsi2xdqwnOjDRcKazh8S0eSMaxTjmp9xfUh1QjXP%2FcsX3OgP%2BQB%2FkA%3D%3D&"+
-   "keyword="+eKeyword+"&contentTypeId=12&arrange=C&listYN=Y&pageNo=1&numOfRows=100&MobileOS=ETC&MobileApp=AppTesting&_type=json"
+   "keyword="+eKeyword+"&contentTypeId=12&arrange=C&listYN=Y&pageNo=1&numOfRows=500&MobileOS=ETC&MobileApp=AppTesting&_type=json"
 
     return url;
 }
 
 function TextMaker(keyword, count, list) {
-    var sightInformation = "안녕하세요. 요청하신 키워드 "+keyword+"의 검색결과입니다. " +
-    count+"개의 볼거리가 있습니다. 관광지 목록은 다음과 같습니다. "+list;
+    var sightInformation = "안녕하세요. 요청하신 키워드 "+keyword+"의 한국관광공사 데이터 검색 결과입니다.\n" +
+    count+"개의 볼거리가 있습니다. 관광지 목록은 다음과 같습니다.\n"+list;
     
     return sightInformation;
 }
