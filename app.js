@@ -76,6 +76,6 @@ app.use(function(err, req, res, next) {
 });
 
 //서버시작
-app.listen(9007, function () {
-  console.log('Example app listening on port 9007!');
+app.listen(9977, function () {
+  console.log('Example app listening on port 9977!');
 });
