@@ -22,7 +22,7 @@ function runByKeyword(keyword, res) {
         totalCountOfSightsinKeyword = sightName.response.body.totalCount; //키워드 지역의 총 관광지 개수
         //키워드 결과 값이 한가지 일 경우
         if (totalCountOfSightsinKeyword == 1) {
-            sightList={};
+            sightList = {};
             sightList[0] = sightName.response.body.items.item.title; //관광지명
             sightList[1] = sightName.response.body.items.item.addr1; //주소
             sightList[2] = sightName.response.body.items.item.firstimage; //사진
@@ -70,8 +70,9 @@ function sightInfoInJSON(keyword, count, list, type) {
         };
     }
     if (type == 'single') {
-        console.log(list[0] + list[1] + list[2]);
-        if(list[2]==null){list[2] = "http://unsan.nonghyup.com/user/unsan/sopmal/images/goods/thumb/egovtemp_201607271035392700.jpg";}
+        if (list[2] == null) {
+            list[2] = "http://unsan.nonghyup.com/user/unsan/sopmal/images/goods/thumb/egovtemp_201607271035392700.jpg";
+        }
         var message = "안녕하세요. 요청하신 키워드 " + keyword + "의 한국관광공사 데이터 검색 결과입니다.\n" +
             "주소 : " + list[1] + "\n";
         return sightInformation = {

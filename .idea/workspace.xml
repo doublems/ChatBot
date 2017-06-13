@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="560ce391-525c-4777-9092-1dbbf2cb80a4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serviceLogic/G2C/sight.js" afterPath="$PROJECT_DIR$/serviceLogic/G2C/sight.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,8 +33,8 @@
       <file leaf-file-name="sight.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/serviceLogic/G2C/sight.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1387">
-              <caret line="73" column="133" lean-forward="false" selection-start-line="73" selection-start-column="133" selection-end-line="73" selection-end-column="133" />
+            <state relative-caret-position="399">
+              <caret line="72" column="30" lean-forward="true" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -575,7 +574,7 @@
       <option name="presentableId" value="Default" />
       <updated>1497329076334</updated>
       <workItem from="1497329077633" duration="166000" />
-      <workItem from="1497329265855" duration="5951000" />
+      <workItem from="1497329265855" duration="6011000" />
     </task>
     <task id="LOCAL-00001" summary="Changed port">
       <created>1497330220143</created>
@@ -591,11 +590,18 @@
       <option name="project" value="LOCAL" />
       <updated>1497330503443</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="단일 관광지 정보 추가">
+      <created>1497337725860</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1497337725860</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6117000" />
+    <option name="totallyTimeSpent" value="6177000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -639,7 +645,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changed port" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed port" />
+    <MESSAGE value="단일 관광지 정보 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="단일 관광지 정보 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -682,8 +689,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/serviceLogic/G2C/sight.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1387">
-          <caret line="73" column="133" lean-forward="false" selection-start-line="73" selection-start-column="133" selection-end-line="73" selection-end-column="133" />
+        <state relative-caret-position="399">
+          <caret line="72" column="30" lean-forward="true" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
